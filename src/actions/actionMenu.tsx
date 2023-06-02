@@ -1,10 +1,11 @@
 import { HamburgerMenuIcon, palette } from "../components/icons";
 import { ToolButton } from "../components/ToolButton";
 import { t } from "../i18n";
-import { showSelectedShapeActions, getNonDeletedElements } from "../element";
+import { getNonDeletedElements, showSelectedShapeActions } from "../element";
 import { register } from "./register";
 import { allowFullScreen, exitFullScreen, isFullScreen } from "../utils";
 import { KEYS } from "../keys";
+import { DEFAULT_SIDEBAR, LIBRARY_SIDEBAR_TAB } from "../constants";
 
 export const actionToggleCanvasMenu = register({
   name: "toggleCanvasMenu",
@@ -68,6 +69,23 @@ export const actionFullScreen = register({
     };
   },
   keyTest: (event) => event.key === KEYS.F && !event[KEYS.CTRL_OR_CMD],
+});
+
+export const actionToggleLibrary = register({
+  name: "toggleLibrary",
+  viewMode: true,
+  trackEvent: { category: "canvas" },
+  perform: (_, appState) => ({
+    appState: {
+      ...appState,
+      openSidebar:
+        appState.openSidebar !== null
+          ? null
+          : { name: DEFAULT_SIDEBAR.name, tab: LIBRARY_SIDEBAR_TAB },
+    },
+    commitToHistory: false,
+  }),
+  keyTest: (event) => event.key === KEYS.B && !event[KEYS.CTRL_OR_CMD],
 });
 
 export const actionShortcuts = register({

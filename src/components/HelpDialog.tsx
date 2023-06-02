@@ -269,6 +269,7 @@ export const HelpDialog = ({ onClose }: { onClose?: () => void }) => {
               label={t("labels.toggleTheme")}
               shortcuts={[getShortcutKey("Alt+Shift+D")]}
             />
+            <Shortcut label="Toggle Library" shortcuts={["B"]} />
             <Shortcut
               label={t("stats.title")}
               shortcuts={[getShortcutKey("Alt+/")]}
